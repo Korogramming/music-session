@@ -42,4 +42,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //update_atやcreated_atが必要ないため、無効にしてみる
+    public $timestamps = false;
+
+    //PostVideoに対するリレーション[1対多]なので複数形
+    public function post_videos()
+    {
+        return $this->hasMany(PostVideo::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    public function applications(){
+        return $this->hasMany(Application::class);
+    }
+
+    public function chats(){
+        return $this->hasMany(Chat::class);
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }
